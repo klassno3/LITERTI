@@ -80,12 +80,12 @@ const Navigation = () => {
   }
   return (
     
-    <div className={`sticky top-0 left-0 z-40  ${ active ? "bg-tertiary-100 shadow-lg text-secondary-200" :"  bg-tertiary-100 shadow-none text-secondary-200" }`}>
+    <div className={`sticky top-0 left-0 z-40  ${ active ? "bg-tertiary-100 shadow-lg  text-secondary-200" :"  bg-tertiary-100 shadow-none text-secondary-200" }`}>
      <div className="w-11/12 mx-auto ">
    
       <div className="flex justify-between items-center  pt-4 pb-3 md:pt-6 md:pb-4 ">
         
-        <Link to="/" className="flex flex-col w-8 sm:w-12">
+          <Link onClick={ handleNavigation } to="/" className="flex flex-col w-8 sm:w-16">
 
             <img src={ Logo } alt="" />
         </Link>
@@ -98,19 +98,19 @@ const Navigation = () => {
 
             <img onClick={ handleClose } src={ Close } alt="" className={ `${ open ? "block" : "hidden" } cursor-pointer fixed top-[40px] right-[40px] sm:w-7 w-6 ` } />
             
-           <div className="flex  flex-col gap-10 font-inter text-xl f text-tertiary-300 tracking-wide">
-          <Link onClick={handleNavigation} className={`cursor-pointer  hover:text-primary-300/70 ${ selectedTab === 'home' && selection === null ? "text-primary-100 font-semibold" : '' } `} to="/">Home</Link>
-          <Link onClick={handleNavigation}  className={`cursor-pointer  hover:text-primary-300/70 ${ selectedTab === 'challenge' && selection === null ? "text-primary-100 font-semibold" : '' } `} to="/challenge">Reading challenge</Link>
-                         <div  className="">  <DropDown options={ options } selection={ selection } onSelect={ handleSelect } /></div> 
+           <div className="flex  flex-col gap-10 font-poppins text-lg text-tertiary-300 tracking-wide">
+          <Link onClick={handleNavigation} className={`cursor-pointer  hover:text-primary-200 ${ selectedTab === 'home' && selection === null ? "text-primary-300 font-semibold" : '' } `} to="/">Home</Link>
+          <Link onClick={handleNavigation}  className={`cursor-pointer  hover:text-primary-200 ${ selectedTab === 'challenge' && selection === null ? "text-primary-300 font-semibold" : '' } `} to="/challenge">Reading challenge</Link>
+                         <div  className="">  <DropDown title={"My Books"}  options={ options } selection={ selection } onSelect={ handleSelect } /></div> 
 
               
             </div>
           </div>
         
-        <div className=" hidden lg:flex gap-16 font-inter text-xl f text-tertiary-300 tracking-wide">
-            <Link onClick={handleNavigation}  className={`cursor-pointer  hover:text-primary-300/70 ${ selectedTab === 'home' && selection === null ? "text-primary-100 font-semibold" : '' } `} to="/">Home</Link>
-          <Link  onClick={handleNavigation} className={`cursor-pointer hover:text-primary-300/70  ${ selectedTab === 'challenge' && selection === null ? "text-primary-100 font-semibold" : '' } `} to="/challenge">Reading Challenge</Link>
-              <div className=""><DropDown options={ options } selection={ selection } onSelect={ handleSelect } /></div>
+        <div className=" hidden lg:flex gap-16 font-poppins text-lg text-tertiary-300 tracking-wide">
+            <Link onClick={handleNavigation}  className={`cursor-pointer  hover:text-primary-300 ${ selectedTab === 'home' && selection === null ? "text-primary-200 font-semibold" : '' } `} to="/">Home</Link>
+          <Link  onClick={handleNavigation} className={`cursor-pointer hover:text-primary-300  ${ selectedTab === 'challenge' && selection === null ? "text-primary-200 font-semibold" : '' } `} to="/challenge">Reading Challenge</Link>
+              <div className=""><DropDown title={"My Books"} options={ options } selection={ selection } onSelect={ handleSelect } /></div>
           </div>
 
      </div>

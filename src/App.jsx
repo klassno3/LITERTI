@@ -70,7 +70,7 @@ function App () {
 ]);
   return (
      
-    <div className="bg-tertiary-100 h-screen text-secondary-100" >
+    <div className="bg-tertiary-100  text-secondary-100" >
        <RouterProvider router={router} />
       
       </div> 

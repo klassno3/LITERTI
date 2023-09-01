@@ -7,16 +7,21 @@ module.exports = {
 
     colors: {
       'primary-100': '#5917AD', 
-      'primary-200': '#8222FC', 
-      'primary-300': '#9747FF', 
+      'primary-200': '#8839ED', 
+      'primary-300': '#B482F3', 
       'secondary-100': '#CBC2D6', 
       'secondary-200': '#ffffff', 
+      'secondary-300': '#A68CC6', 
       'tertiary-100': '#040B19', 
-      'tertiary-200': '#1C2A46', 
+      'tertiary-200': '#192231', 
   
     },
     
-    extend: {},
+    extend: {
+      fontFamily: {
+        "poppins": "Poppins, sans-serif "
+      }
+    },
   },
   plugins: [],
 }
