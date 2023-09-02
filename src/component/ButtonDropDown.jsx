@@ -40,7 +40,7 @@ const renderedOptions = options.map( ( option ) => {
   return (
     <div ref={divEl} className='cursor-pointer  group transition-all duration-300 '>
       {/* if selection is null it will print Select.... if it not null it wil print selection.label */}
-      <div onClick={ handleClick } className={ `  bg-primary-100 flex justify-between font-poppins px-6  py-4 w-full group-hover:bg-primary-200 transition-all duration-300 ${isOpen ? "rounded-none  hover:bg-primary-200 " : "rounded-t-none  rounded-b-lg  "}` }>
+      <div onClick={ handleClick } className={ `  bg-primary-100 flex justify-between items-center gap-4font-poppins px-3  py-4 w-full group-hover:bg-primary-200 transition-all duration-300 ${isOpen ? "rounded-none  hover:bg-primary-200 " : "rounded-t-none  rounded-b-md  "}` }>
         <div className='font-poppins capitalize'>{ selection ? selection : "Want to Read" }</div>
         <GoChevronDown size={20} />
       </div>

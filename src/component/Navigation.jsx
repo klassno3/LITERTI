@@ -64,7 +64,7 @@ const Navigation = () => {
   }
   const options = [
     { label: "Want to Read ", value: "Want to Read " },
-    { label: "Currently Reading", value: "Currently Reading" },
+    { label: "Reading", value: "Reading" },
     { label: "Did not Finish", value: "Did not Finish" },
     { label: "Read", value: "Read" },
   ];
@@ -81,7 +81,9 @@ const Navigation = () => {
   return (
     
     <div className={`sticky top-0 left-0 z-40  ${ active ? "bg-tertiary-100 shadow-lg  text-secondary-200" :"  bg-tertiary-100 shadow-none text-secondary-200" }`}>
-     <div className="w-11/12 mx-auto ">
+      <div className="max-w-[1440px mx-auto]  ">
+        
+      <div className="w-11/12 mx-auto ">
    
       <div className="flex justify-between items-center  pt-4 pb-3 md:pt-6 md:pb-4 ">
         
@@ -115,6 +117,7 @@ const Navigation = () => {
 
      </div>
     </div>
+     </div>
     </div>
     
   )

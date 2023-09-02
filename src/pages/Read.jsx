@@ -2,9 +2,7 @@ import React from 'react'
 
 const Read = () => {
   return (
-    <div>
-      Read
-    </div>
+    <div className="max-w-[1440px mx-auto]  "></div>
   )
 }
 

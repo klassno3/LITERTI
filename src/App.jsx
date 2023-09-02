@@ -1,6 +1,6 @@
 import Footer from "./component/Footer"
 import Navigation from "./component/Navigation"
-import BooksDetails from "./component/BooksDetails"
+import BooksDetails from "./pages/BooksDetails"
 import Home  from "./pages/Home"
 import CurrentlyReading from "./pages/CurrentlyReading"
 import Read from "./pages/Read"
@@ -53,7 +53,7 @@ function App () {
           element:<Read/>,
         },
          {
-          path: "/currently reading",
+          path: "/reading",
           element:<CurrentlyReading/>,
         },
          {
@@ -70,7 +70,7 @@ function App () {
 ]);
   return (
      
-    <div className="bg-tertiary-100  text-secondary-100" >
+    <div className=" max-w-[1440px mx-auto] bg-tertiary-100  text-secondary-100" >
        <RouterProvider router={router} />
       
       </div> 

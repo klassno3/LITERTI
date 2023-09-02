@@ -8,7 +8,7 @@ const Button = () => {
   }
     const options = [
     { label: "Want to Read ", value: "Want to Read " },
-    { label: "Currently Reading", value: "Currently Reading" },
+    { label: "Reading", value: "Reading" },
     { label: "Did not Finish", value: "Did not Finish" },
     { label: "Read", value: "Read" },
   ];

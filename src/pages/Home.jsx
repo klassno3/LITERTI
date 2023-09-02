@@ -20,20 +20,25 @@ const Home = () => {
     const thumbnail = imageLinks ? imageLinks.thumbnail : "";
 
     return { id, description, publishedDate, title, author, thumbnail, pageCount,averageRating };
-  });
+  } );
+
+  
 
   const renderedBooks = result.map( ( book ) => (
     <BookList key={ book.id } book={ book } />
   ) );
 
   return (
+    <div className="max-w-[1440px mx-auto]  ">
+
     <div className="w-11/12 mx-auto">
       <Search />
   
            
-      <div className="grid  py-10 justify-center items-start grid-cols-1 md:grid-cols-3 gap-8 lg:grid-cols-5 ">
+      <div className="grid  py-10 justify-center items-start grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:grid-cols-6 ">
         {renderedBooks}
 </div>
+    </div>
     </div>
   );
 };

@@ -2,10 +2,7 @@ import React from 'react'
 
 const DidNotFinish = () => {
   return (
-    <div>
-       DidNotFinish
-
-    </div>
+   <div className="max-w-[1440px mx-auto]  "></div>
   )
 }
 

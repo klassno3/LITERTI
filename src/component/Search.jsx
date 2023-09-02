@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import {FaSearch} from "react-icons/fa"
 import { FetchBooksContext } from "../context/FetchBooksContext";
 
 const Search = () => {
@@ -15,18 +14,21 @@ const Search = () => {
   }
   const handleChange = (event) => {
     setSearchTerm(event.target.value)
-    console.log(searchTerm)
+
     
   }
   return (
     <div className="mt-16 mb-6">
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-between gap-4 px-5 py-3 bg-secondary-200 rounded-md w-1/4">
-          <input value={searchTerm} onChange={ handleChange } className="focus:outline-none focus:shadow-outline text-tertiary-100/70 font-poppins  " type="search " placeholder="Search By Author, Title....." />
-          <button  className="text-tertiary-100"><FaSearch size={20}/></button>
-        </div>
+       
+      
+    
+      <div className="relative max-w-sm  mt-20">
+    <input value={ searchTerm } onChange={ handleChange } className="w-full font-poppins text-tertiary-200 py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-300 " type="search" placeholder="Search By Author, Title....."/>
+</div>
       </form>
     </div>
+
   )
 }
 
