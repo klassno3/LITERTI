@@ -6,12 +6,12 @@ import CurrentlyReading from "./pages/CurrentlyReading"
 import Read from "./pages/Read"
 import WantToRead from "./pages/WantToRead"
 import ReadingChallenge from "./pages/ReadingChallenge"
+import DidNotFinish from "./pages/DidNotFinish"
 import {
   createBrowserRouter,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import DidNotFinish from "./pages/DidNotFinish"
 
 
 function App () {

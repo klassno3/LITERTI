@@ -2,27 +2,28 @@ import { useState, useEffect, createContext } from "react";
 
 export const FetchBooksContext = createContext();
 const BooksProvider = ( { children } ) => {
-  // const [ search, setSearch ] = useState( "react" )
+
   const [ books, setBooks ] = useState( {});
   
   ;
-  //////////////////////////////////////////////
+ 
 
 
 const fetchBooks = async (searchTerm) => {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=`
+      `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=AIzaSyB9EREbXC8-zdMKfImmX2VRP4NM3sKDBrk`
     );
     const data = await response.json();
-    setBooks(data);
+    setBooks( data );
+    console.log(searchTerm)
   } catch (error) {
     console.error('Error fetching books:', error);
   }
 };
 
 useEffect(() => {
-  fetchBooks();
+  fetchBooks("thriller");
 }, []);
 
 

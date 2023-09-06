@@ -9,11 +9,12 @@ const Search = () => {
     event.preventDefault();
     fetchBooks( searchTerm );
     setSearchTerm("")
-  
-
+    
+    
   }
   const handleChange = (event) => {
     setSearchTerm(event.target.value)
+    
 
     
   }
@@ -23,8 +24,8 @@ const Search = () => {
        
       
     
-      <div className="relative max-w-sm  mt-20">
-    <input value={ searchTerm } onChange={ handleChange } className="w-full font-poppins text-tertiary-200 py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-300 " type="search" placeholder="Search By Author, Title....."/>
+      <div className="">
+    <input value={ searchTerm } onChange={ handleChange } className="w-10/12 lg:w-1/4 md:w-1/2  md:mx-0  mx-auto flex justify-center font-poppins text-tertiary-200 py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-300 " type="search" placeholder="Search By Author, Title....."/>
 </div>
       </form>
     </div>

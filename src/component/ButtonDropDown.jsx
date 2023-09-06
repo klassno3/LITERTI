@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef ,useContext} from 'react'
 import { GoChevronDown} from "react-icons/go"
-
-const ButtonDropDown = ( { options, selection, onSelect } ) => {
- const [ isOpen, setIsOpen ] = useState( false );
+import { MyBooksContext } from '../context/MyBooksContext';
+const ButtonDropDown = ( { options, selection, onSelect,book,id } ) => {
+  const [ isOpen, setIsOpen ] = useState( false );
+  const {addToCurrentlyReading,addToWantToRead,addToDidNotFinish,addToRead}=useContext(MyBooksContext)
   const divEl = useRef();
   useEffect( () => {
     const handler = ( event ) => {
@@ -23,30 +24,44 @@ const ButtonDropDown = ( { options, selection, onSelect } ) => {
     setIsOpen( !isOpen );
 
   }
-  const handleOptionClick = (option) => {
-    setIsOpen( false );
-    
-    onSelect( option );
-    
+
+  const handleOptionClick = (option, book, id) => {
+  setIsOpen(false);
+  console.log(option.value);
+  
+  if (option.value === "Want to Read ") {
+    addToWantToRead(book, id);
+  } else if (option.value === "Reading") {
+    addToCurrentlyReading(book, id);
+  }else if (option.value === "Read") {
+    addToRead(book, id);
+  } else if (option.value === "Did not Finish") {
+    addToDidNotFinish(book, id);
   }
+  onSelect(option);
+  
+};
 
 const renderedOptions = options.map( ( option ) => {
       
-  return ( <div className=' hover:text-tertiary-100 transition-all duration-300  pb-2' onClick={()=> handleOptionClick(option) } key={ option.value }>{ option.label }</div> )
+  return ( <div className=' hover:text-tertiary-100 transition-all duration-300' onClick={()=> handleOptionClick(option,book,id) } key={ option.value }>{ option.label }</div> )
   } ); 
       
  
 
   return (
-    <div ref={divEl} className='cursor-pointer  group transition-all duration-300 '>
+    <div ref={divEl}  className={`cursor-pointer bg-primary-100 rounded-t-none  group transition-all duration-300 ${isOpen ? "rounded-none  " : "rounded-t-none  rounded-b-md  "} `}>
       {/* if selection is null it will print Select.... if it not null it wil print selection.label */}
-      <div onClick={ handleClick } className={ `  bg-primary-100 flex justify-between items-center gap-4font-poppins px-3  py-4 w-full group-hover:bg-primary-200 transition-all duration-300 ${isOpen ? "rounded-none  hover:bg-primary-200 " : "rounded-t-none  rounded-b-md  "}` }>
-        <div className='font-poppins capitalize'>{ selection ? selection : "Want to Read" }</div>
-        <GoChevronDown size={20} />
-      </div>
-      { isOpen && <div className=' absolute bg-primary-100  font-poppins flex flex-col justify-center items-center gap-2 z-50  shadow-xl px-6  py-4 transition-all duration-300 rounded-b-md  group-hover:bg-primary-200'>{ renderedOptions } </div> }
+      <div onClick={ handleClick } className={ `relative rounded-full flex justify-between items-center   gap-4 font-poppins p-3   transition-all duration-300 ` }>
+       
+        <div className='font-poppins text-sm capitalize'>{ selection ? selection : "Want to Read" }</div>
+        <GoChevronDown className={` transition-all duration-300  ${isOpen ? "rotate-180" : ""}`} size={20} />
+      { isOpen && <div className=' absolute w-full top-10 right-0 flex flex-col items-start gap-2 font-poppins bg-primary-100  z-50 px-3 py-4 transition-all duration-300 rounded-b-md '>{ renderedOptions } </div> }
+        </div>
+        
       
     </div>
+    
   )
 }
 

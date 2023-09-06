@@ -29,16 +29,13 @@ const Home = () => {
   ) );
 
   return (
-    <div className="max-w-[1440px mx-auto]  ">
-
-    <div className="w-11/12 mx-auto">
-      <Search />
-  
-           
-      <div className="grid  py-10 justify-center items-start grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:grid-cols-6 ">
-        {renderedBooks}
-</div>
-    </div>
+    <div className="max-w-[1440px] mx-auto  ">
+      <div className="w-10/12 mx-auto">
+        <Search />
+        <div className=" grid py-10 w-8/12 md:w-full mx-auto justify-center items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 lg:grid-cols-5 xl:grid-cols-6 ">
+          { renderedBooks }
+        </div>
+      </div>
     </div>
   );
 };
