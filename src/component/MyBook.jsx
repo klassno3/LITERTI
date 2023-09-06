@@ -39,11 +39,12 @@ const MyBook = ( { book, rating ,name} ) => {
               { rating ?
                 <div className="flex gap-2  ">
 
-              <AiOutlineStar  className='cursor-pointer' />
-              <AiOutlineStar className='cursor-pointer' />
-              <AiOutlineStar className='cursor-pointer' />
-              <AiOutlineStar className='cursor-pointer' />
-              <AiOutlineStar className='cursor-pointer' /> 
+                  Your Rating:
+              <AiOutlineStar  size={20}  className='cursor-pointer' />
+              <AiOutlineStar size={20}  className='cursor-pointer' />
+              <AiOutlineStar size={20}  className='cursor-pointer' />
+              <AiOutlineStar  size={20} className='cursor-pointer' />
+              <AiOutlineStar size={20}  className='cursor-pointer' /> 
                 </div>
                 : "" }
             
