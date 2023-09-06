@@ -3,8 +3,8 @@ import {BsTrash3Fill} from 'react-icons/bs';
 import { AiFillStar,AiOutlineStar} from 'react-icons/ai';
 import { MyBooksContext } from '../context/MyBooksContext';
 const MyBook = ( { book, rating ,name} ) => {
-  const {removeBook,clearRead } = useContext(MyBooksContext)
-  const {id,pageCount,publisher,categories, publishedDate, title, author, thumbnail, averageRating } = book;
+  const {removeBook } = useContext(MyBooksContext)
+  const {id,pageCount, title, author, thumbnail, averageRating } = book;
   
   
   const result = [];
@@ -12,9 +12,7 @@ const MyBook = ( { book, rating ,name} ) => {
     result.push( <div className='text-primary-200'><AiFillStar size={ 20 } /></div> );
   }
 
-  if ( rating ) {
-    
-  }
+
 
   return (
    <div className="max-w-[1440px] mx-auto  ">
@@ -36,7 +34,22 @@ const MyBook = ( { book, rating ,name} ) => {
               <p className="text-secondary-100/90">{ averageRating }</p>
               
             </div>
-            <p className="">{ pageCount ? pageCount +" Pages": "" }</p>
+            <p className="">{ pageCount ? pageCount + " Pages" : "" }</p>
+            <div className="">
+              { rating ?
+                <div className="flex gap-2  ">
+
+              <AiOutlineStar  className='cursor-pointer' />
+              <AiOutlineStar className='cursor-pointer' />
+              <AiOutlineStar className='cursor-pointer' />
+              <AiOutlineStar className='cursor-pointer' />
+              <AiOutlineStar className='cursor-pointer' /> 
+                </div>
+                : "" }
+            
+            
+            
+            </div>
             
 
             
