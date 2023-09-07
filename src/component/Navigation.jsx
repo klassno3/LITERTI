@@ -83,7 +83,7 @@ const Navigation = () => {
     <div className={`sticky top-0 left-0 z-40  ${ active ? "bg-tertiary-100 shadow-lg  text-secondary-200" :"  bg-tertiary-100 shadow-none text-secondary-200" }`}>
       <div className="max-w-[1440px] mx-auto  ">
         
-      <div className="w-10/12 mx-auto ">
+      <div className="w-11/12 mx-auto ">
    
       <div className="flex justify-between items-center  pt-4 pb-3 md:pt-6 md:pb-4 ">
         
@@ -103,7 +103,10 @@ const Navigation = () => {
            <div className="flex  flex-col gap-10 font-poppins text-lg text-tertiary-300 tracking-wide">
           <Link onClick={handleNavigation} className={`cursor-pointer  hover:text-primary-200 ${ selectedTab === 'home' && selection === null ? "text-primary-300 font-semibold" : '' } `} to="/">Home</Link>
           <Link onClick={handleNavigation}  className={`cursor-pointer  hover:text-primary-200 ${ selectedTab === 'challenge' && selection === null ? "text-primary-300 font-semibold" : '' } `} to="/challenge">Reading challenge</Link>
-                         <div  className="">  <DropDown title={"My Books"}  options={ options } selection={ selection } onSelect={ handleSelect } /></div> 
+                <div className="">
+                  <DropDown nav={ setOpen }  options={ options } selection={ selection } onSelect={ handleSelect } />
+                  
+                </div> 
 
               
             </div>
@@ -112,7 +115,7 @@ const Navigation = () => {
         <div className=" hidden lg:flex gap-16 font-poppins text-lg text-tertiary-300 tracking-wide">
             <Link onClick={handleNavigation}  className={`cursor-pointer  hover:text-primary-300 ${ selectedTab === 'home' && selection === null ? "text-primary-200 font-semibold" : '' } `} to="/">Home</Link>
           <Link  onClick={handleNavigation} className={`cursor-pointer hover:text-primary-300  ${ selectedTab === 'challenge' && selection === null ? "text-primary-200 font-semibold" : '' } `} to="/challenge">Reading Challenge</Link>
-              <div className=""><DropDown title={"My Books"} options={ options } selection={ selection } onSelect={ handleSelect } /></div>
+              <div className=""><DropDown nav={setOpen}  options={ options } selection={ selection } onSelect={ handleSelect } /></div>
           </div>
 
      </div>

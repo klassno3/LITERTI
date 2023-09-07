@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { GoChevronDown } from "react-icons/go"
 import { Link } from 'react-router-dom';
-const DropDown = ( { options, selection, onSelect} ) => {
+const DropDown = ( { options, selection, onSelect,nav} ) => {
   const [ isOpen, setIsOpen ] = useState( false );
   
   const divEl = useRef();
@@ -26,9 +26,9 @@ const DropDown = ( { options, selection, onSelect} ) => {
   }
   const handleOptionClick = (option) => {
     setIsOpen( false );
-    
+    nav( false );
     onSelect( option );
-    
+ 
   }
 
 const renderedOptions = options.map( ( option ) => {
@@ -42,7 +42,7 @@ const renderedOptions = options.map( ( option ) => {
     <div ref={divEl} className='cursor-pointer '>
       {/* if selection is null it will print Select.... if it not null it wil print selection.label */}
       <div onClick={ handleClick } className='group relative flex items-end justify-between  gap-12 w-full'>
-        <div className={`${selection ? "font-semibold text-primary-200" :""}  group-hover:text-primary-300  font-inter capitalize`}>{ selection ? selection : "My Books" }</div>
+        <div className={`${selection ? "font-semibold text-primary-200" :""}  group-hover:text-primary-300  font-inter capitalize`}>{ selection ? selection : "My Books"}</div>
         <GoChevronDown  className={`transition-all duration-300 ${selection ? "font-semibold text-primary-300" :""} group-hover:text-primary-300/70 ${isOpen ? "rotate-180" : ""}`}  size={25} />
       { isOpen && <Link to={`/${selection}`} className=' absolute top-10 right-0 text-secondary-100 flex flex-col gap-2 z-50 shadow-lg bg-tertiary-100 shadow-primary-200/25 px-3 w-full py-3 rounded-b-md '>{ renderedOptions } </Link> }
       </div>
@@ -51,4 +51,4 @@ const renderedOptions = options.map( ( option ) => {
   )
 }
 
-export default DropDown
+export default DropDown;
