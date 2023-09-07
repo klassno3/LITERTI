@@ -7,7 +7,7 @@ const Top = ( { book } ) => {
   const handleRange = (event) => {
     setPage( event.target.value )
     
-    const updatedBook = { ...book, Progress: `${parseFloat( page ) } / ${pageCount} ages` };
+    // const updatedBook = { ...book, Progress: `${parseFloat( page ) } / ${pageCount} ages` };
   
 
 

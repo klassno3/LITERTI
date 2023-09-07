@@ -25,7 +25,7 @@ const MyBook = ( { book, rating ,name} ) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const updatedBook = { ...book, Personalrating: parseFloat( rate ) };
+    // const updatedBook = { ...book, Personalrating: parseFloat( rate ) };
   };
 
 
@@ -63,7 +63,7 @@ const MyBook = ( { book, rating ,name} ) => {
           
                 <form onSubmit={ handleSubmit } className="flex gap-4">
                   <label for="rate">Your Rating: </label>
-                  <input className="rounded-sm  px-2 text-tertiary-200 focus:outline-none focus:ring-2 focus:ring-primary-300 " onChange={ handleChange } type="number" id="rate" name="rating" min="0" max="5" step="0.25" />
+                  <input  value={rate} className="rounded-sm  px-2 text-tertiary-200 focus:outline-none focus:ring-2 focus:ring-primary-300 " onChange={ handleChange } type="number" id="rate" name="rating" min="0" max="5" step="0.25" />
                   
 
                 </form>
