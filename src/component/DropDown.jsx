@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from 'react'
 import { GoChevronDown } from "react-icons/go"
 import { Link } from 'react-router-dom';
 const DropDown = ( { options, selection, onSelect,nav} ) => {
+  const divEl = useRef();
   const [ isOpen, setIsOpen ] = useState( false );
   
-  const divEl = useRef();
   useEffect( () => {
     const handler = ( event ) => {
       if ( !divEl.current ) {
@@ -19,11 +19,12 @@ const DropDown = ( { options, selection, onSelect,nav} ) => {
     return () => {
       document.removeEventListener( "click", handler, true );
     };
-  })
+  } )
+  
   const handleClick = () => {
     setIsOpen( !isOpen );
-
   }
+  
   const handleOptionClick = (option) => {
     setIsOpen( false );
     nav( false );

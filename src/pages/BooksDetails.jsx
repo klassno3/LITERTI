@@ -6,10 +6,10 @@ import Loader from "../component/Loader";
 import { FaStar } from 'react-icons/fa';
 
 const BooksDetails = () => {
+  const { id } = useParams();
+  const { books } = useContext( FetchBooksContext )
   const [ showText, setShowText ] = useState( false );
   const [ selection, setSelection ] = useState( null );
-  const { books } = useContext( FetchBooksContext )
-  const { id } = useParams();
   const { items } = books;
   
   if ( !books || !books.items ) {
@@ -30,12 +30,15 @@ const BooksDetails = () => {
   for ( let i = 0; i < averageRating; i++ ) {
     result.push( <div className='text-primary-200'><FaStar size={ 25 } /></div> );
   }
+
   const handleClick = () => {
     setShowText( !showText );
   }
+
   const handleSelect = ( option ) => {
     setSelection( option.value )
   }
+
   const options = [
     { label: "Want to Read ", value: "Want to Read " },
     { label: "Reading", value: "Reading" },
@@ -53,18 +56,19 @@ const item = {
 };
   
   return (
+    
     <div className="max-w-[1440px] mx-auto  ">
-      <div className="w-9/12 flex justify-center mx-auto  mt-20">
-        <div className="flex justify-center items-start gap-20 font-poppins">
+      <div className="w-11/12 flex  justify-center mx-auto  mt-20">
+        <div className="flex  flex-col md:flex-row justify-center items-start gap-20 font-poppins">
           <div className="flex flex-col">
-            <img className="w-[300px] rounded-xl rounded-l-none rounded-b-none " src={ thumbnail } alt="" />
-            <ButtonDropDown book={ item} image={thumbnail} author={author} id={ id } options={ options } selection={ selection } onSelect={ handleSelect } />
+            <img className="w-[200px] rounded-t-lg " src={ thumbnail } alt="" />
+            <ButtonDropDown book={ item}  id={ id } options={ options } selection={ selection } onSelect={ handleSelect } />
           </div>
           <div className="w-full  text-secondary-100">
             <div className="flex flex-col gap-7">
               <div className="flex flex-col gap-2">
-                <h1 className="text-4xl font-semibold">{ title }</h1>
-                <p className="text-xl">{ author }</p>
+                <h1 className="text-2xl font-semibold md:text-4xl font-dm tracking-wide">{ title }</h1>
+                <p className="text-base md:text-xl">{ author }</p>
                 <div className="flex gap-12 items-center">
                   <p className="flex gap-2 ">{ result }</p>
                   <p className="text-secondary-100/90">{ averageRating }</p>
@@ -73,10 +77,10 @@ const item = {
               </div>
               <div className="flex flex-col gap-7">
                 <div className="flex flex-col gap-5 items-start">
-                  <p className="leading-7 tracking-wide text-secondary-100">{ showText ? description : description.slice( 0, 500 ) + "............." }</p>
-                  <button className="bg-primary-100 transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-100 px-4 py-1.5" onClick={ handleClick }>{ showText ? "Show Less" : "Show More" }</button>
+                  <p className="leading-7 tracking-wide text-secondary-100 text-sm md:text-base">{ showText ? description : description.slice( 0, 500 ) + "............." }</p>
+                  <button className="bg-primary-100 flex justify-center transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-100 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base" onClick={ handleClick }>{ showText ? "Show Less" : "Show More" }</button>
                 </div>
-                <div className="text-base  flex flex-col gap-2">
+                <div className="text-sm md:text-base  flex flex-col gap-2">
                   <p className="">{ pageCount } pages</p>
                   <div className="flex gap-2">
                     <p className="">Publisher</p>

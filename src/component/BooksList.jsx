@@ -20,19 +20,17 @@ const BooksList = ({book}) => {
     { label: "Want to Read ", value: "Want to Read " },
     { label: "Reading", value: "Reading" },
     { label: "Did not Finish", value: "Did not Finish" },
-    
     { label: "Read", value: "Read" },
 
   ];
 
   return (
     
-    
     <div key={ id } className=" max-w-[1440px mx-auto] ">
       <Link to={ `book/${ id }` } >
         <div className='overflow-hidden cursor-pointer relative group flex flex-col'>
 
-          <img className=' h-[200px] rounded-b-none rounded-t-lg ' src={ thumbnail } alt="product" />
+          <img className=' h-[200px] rounded-b-none rounded-t-lg ' src={ thumbnail } alt="book" />
           <div className="absolute opacity-0 bottom-0 w-full translate-y-32 p-4  flex-col items-center gap-1 bg-tertiary-100/90 group-hover:opacity-100  group-hover:translate-y-0 group-hover:flex transition-all duration-300">
             <h3 className="font-poppins text-center">{ title.slice( 0, 20 ) }</h3>
             <h3 className="font-poppins text-center">By { author.slice( 0, 20 ) }</h3>

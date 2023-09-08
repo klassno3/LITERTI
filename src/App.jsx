@@ -7,6 +7,7 @@ import Read from "./pages/Read"
 import WantToRead from "./pages/WantToRead"
 import ReadingChallenge from "./pages/ReadingChallenge"
 import DidNotFinish from "./pages/DidNotFinish"
+
 import {
   createBrowserRouter,
   Outlet,
@@ -19,51 +20,54 @@ function App () {
   const Layout = () => {
     return (
       <div className="">
-
         <Navigation />
-       
-        <Outlet/>
-     <Footer/>
+        <Outlet />
+        <Footer />
       </div>
+      
     );
   }
   const router = createBrowserRouter([
   {
-    path: "/",
+      path: "/",
       element: <Layout />,
       children: [
         
-      
-       
-         {
+        {
           path: "/",
-          element:<Home className="z-10"/>,
+          element: <Home className="z-10" />,
         },
+
          {
           path: "/want to read",
           element:<WantToRead/>,
         },
-       
+
          {
           path: "/book/:id",
           element:<BooksDetails/>,
         },
+
          {
           path: "/read",
           element:<Read/>,
         },
+
          {
           path: "/reading",
           element:<CurrentlyReading/>,
         },
+
          {
           path: "/did not finish",
           element:<DidNotFinish/>,
         },
+
          {
           path: "/challenge",
           element:<ReadingChallenge/>,
         },
+         
       ]
     
   },
