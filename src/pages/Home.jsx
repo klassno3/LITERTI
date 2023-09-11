@@ -2,7 +2,7 @@ import { useContext } from "react";
 import BookList from "../component/BooksList";
 import Search from "../component/Search";
 import Loader from "../component/Loader";
-import HeroPic from "../images/H.svg"
+import HeroPic from "../images/hero-min.jpg"
 import { FetchBooksContext } from "../context/FetchBooksContext";
 
 const Home = () => {
