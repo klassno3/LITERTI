@@ -21,16 +21,18 @@ const BooksDetails = () => {
   } )
 
   
+  
   const { volumeInfo } = book;
   const {description,ratingsCount ,publisher, categories, title, publishedDate, authors, imageLinks, pageCount, averageRating } = volumeInfo;
   const author = authors ? authors.join( ", " ) : "Unknown";
   const thumbnail = imageLinks ? imageLinks.thumbnail : "";
-
+  
   const result = [];
   for ( let i = 0; i < averageRating; i++ ) {
     result.push( <div className='text-primary-200'><FaStar size={ 25 } /></div> );
   }
-
+  console.log(pageCount)
+  
   const handleClick = () => {
     setShowText( !showText );
   }
@@ -72,7 +74,7 @@ const item = {
                 <div className="flex gap-12 items-center">
                   <p className="flex gap-2 ">{ result }</p>
                   <p className="text-secondary-100/90">{ averageRating }</p>
-                  <p className="text-secondary-100/90">{ ratingsCount } rating</p>
+                  <p className="text-secondary-100/90">{ ratingsCount ? ratingsCount + " rating" : null }</p>
                 </div>
               </div>
               <div className="flex flex-col gap-7">
@@ -81,7 +83,7 @@ const item = {
                   <button className="bg-primary-100 flex justify-center transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-100 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base" onClick={ handleClick }>{ showText ? "Show Less" : "Show More" }</button>
                 </div>
                 <div className="text-sm md:text-base  flex flex-col gap-2">
-                  <p className="">{ pageCount } pages</p>
+                  <p className="">{ pageCount ? pageCount + " Pages" : null }</p>
                   <div className="flex gap-2">
                     <p className="">Publisher</p>
                     <p className="">{ publisher }</p>

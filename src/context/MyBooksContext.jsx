@@ -1,5 +1,4 @@
-import { useState, createContext, } from "react";
-
+import { useState, createContext } from "react";
 export const MyBooksContext = createContext();
 const MyBooksProvider = ({children}) => {
   const [ read, setRead ] = useState( [] );
@@ -7,25 +6,31 @@ const MyBooksProvider = ({children}) => {
   const [ didNotFinish, setDidNotFinish ] = useState( [] );
   const [ currentlyReading, setCurrentlyReading ] = useState( [] )
   
-  
-
-   
   const addToWantToRead = ( book, id ) => {
- 
-      // Check if the book already exists in the wantToRead array
-    const isBookInList = wantToRead.some((item) => item.id === id);
-    const isBookInOtherList = currentlyReading.some((item) => item.id === id) ||  read.some((item) => item.id === id) ||  didNotFinish.some((item) => item.id === id) ;
-    
-    if ( isBookInOtherList ) {
-      alert( 'This Book is  already in the other list!!! ' );
-    }
-    if (!isBookInList && !isBookInOtherList) {
-      setWantToRead( ( prevBooks ) => [ ...prevBooks, { ...book, id } ] );
-    } else {
-        console.log('Book already exists in the list!');
-    }
+  const isBookInList = wantToRead.some((item) => item.id === id);
+      const isBookInOtherList = currentlyReading.some( ( item ) => item.id === id ) || read.some( ( item ) => item.id === id ) || didNotFinish.some( ( item ) => item.id === id );
 
-  };
+    currentlyReading.some((item) => item.id === id) ||
+    read.some((item) => item.id === id) ||
+    didNotFinish.some((item) => item.id === id);
+
+  if (isBookInOtherList) {
+    alert('This book is already in another list!');
+  }
+  if (!isBookInList && !isBookInOtherList) {
+    const updatedRead = [...wantToRead, { ...book, id }];
+    setWantToRead(updatedRead);
+    const bookCount = updatedRead.length ;
+    
+
+    // Persist updatedRead and bookWantToReadAmount to localStorage
+    localStorage.setItem('wantToReadBooks', JSON.stringify(updatedRead));
+    localStorage.setItem('NumberOfWantToReadBooks',bookCount);
+  }
+};
+ 
+
+  
 
   const addToCurrentlyReading = ( book, id ) => {
 
@@ -38,27 +43,36 @@ const MyBooksProvider = ({children}) => {
       
     }
     if (!isBookInList && !isBookInOtherList) {
-      setCurrentlyReading( ( prevBooks ) => [ ...prevBooks, { ...book, id } ] );
-    } else {
-        console.log('Book already exists in the list!');
+       const updatedRead = [...currentlyReading, { ...book, id }];
+      setCurrentlyReading(updatedRead );
+      
+      const bookCount = updatedRead.length ;
+      // Persist the updatedRead array in local storage
+      localStorage.setItem('currentlyReadingBooks', JSON.stringify(updatedRead));
+      localStorage.setItem( "NumberOfReadingBooks", bookCount );
     }
+  } 
+  
 
-  };
 
   const addToRead = ( book, id ) => {
  
-      // Check if the book already exists in the wantToRead array
+    // Check if the book already exists in the wantToRead array
     const isBookInList = read.some( ( item ) => item.id === id );
     const isBookInOtherList = wantToRead.some( ( item ) => item.id === id ) || currentlyReading.some( ( item ) => item.id === id ) || didNotFinish.some( ( item ) => item.id === id );
     
-   if ( isBookInOtherList ) {
+    if ( isBookInOtherList ) {
       alert( 'This Book is  already in the other list!!! ' );
       
     }
     if ( !isBookInList && !isBookInOtherList ) {
-      setRead( ( prevBooks ) => [ ...prevBooks, { ...book, id } ] );
-    } else {
-        console.log('Book already exists in the list!');
+      const updatedRead = [...read, { ...book, id }];
+    setRead(updatedRead);
+    const bookCount = updatedRead.length ;
+ 
+      // Persist the updatedRead array in local storage
+      localStorage.setItem( 'readBooks', JSON.stringify( updatedRead ) );
+      localStorage.setItem( "NumberOfReadBooks", bookCount );
     }
 
   };
@@ -74,100 +88,94 @@ const MyBooksProvider = ({children}) => {
     }
     
     if (!isBookInList && !isBookInOtherList) {
-      setDidNotFinish( ( prevBooks ) => [ ...prevBooks, { ...book, id } ] );
-    } else {
-        console.log('Book already exists in the list!');
+     const updatedRead = [...didNotFinish, { ...book, id }];
+    setDidNotFinish(updatedRead);
+    const bookCount = updatedRead.length ;
+    
+    // Persist the updatedRead array in local storage
+    localStorage.setItem('didNotFinishBooks', JSON.stringify(updatedRead));
+    localStorage.setItem("NumberOfDnfBooks",bookCount)
     }
 
   };
 
   const removeBook = ( id, name ) => {
-      
-   
     if ( name === "want to read" ) {
-        
-      const newBook = wantToRead.filter( ( item ) => {
-          
+      const storedBooks = JSON.parse( localStorage.getItem( 'wantToReadBooks' ) ) 
+      let count = JSON.parse( localStorage.getItem( 'NumberOfWantToReadBooks' ) ) 
+      const newBook = storedBooks.filter( ( item ) => {
         return item.id !== id;
         
       } );
       
 
+      count = newBook.length;
       setWantToRead( newBook );
-      
+      localStorage.setItem( 'wantToReadBooks', JSON.stringify( newBook ) );
+      localStorage.setItem( 'NumberOfWantToReadBooks', count );
 
     } else if ( name === "read" ) {
-      
-      const newBook = read.filter( ( item ) => {
+      const storedBooks = JSON.parse( localStorage.getItem( 'readBooks' ) )
+      let count = JSON.parse(localStorage.getItem('NumberReadBooks')) 
+      const newBook = storedBooks.filter( ( item ) => {
           
         return item.id !== id;
         
       } );
-      
-        
+       count = newBook.length;
       setRead( newBook );
-      
+      localStorage.setItem( 'readBooks', JSON.stringify( newBook ) );
+      localStorage.setItem( 'NumberOfReadBooks', count );
 
     } else if ( name === "reading" ) {
-      
-      const newBook = currentlyReading.filter( ( item ) => {
-          
+      const storedBooks = JSON.parse( localStorage.getItem( 'currentlyReadingBooks' ) )
+      let count = JSON.parse( localStorage.getItem( 'NumberReadingBooks' ) ) 
+      const newBook = storedBooks.filter( ( item ) => {
+
         return item.id !== id;
-        
       } );
-      
-        
+      count = newBook.length;
       setCurrentlyReading( newBook );
-      
+      localStorage.setItem( 'currentlyReadingBooks', JSON.stringify( newBook ) );
+      localStorage.setItem( 'NumberOfReadingBooks', count );
 
     } else if ( name === "dnf" ) {
-      
-      const newBook = didNotFinish.filter( ( item ) => {
-          
+      const storedBooks = JSON.parse( localStorage.getItem( 'didNotFinishBooks' ) )
+      let count = JSON.parse( localStorage.getItem( 'NumberOfDnfBooks' ) ) 
+      const newBook = storedBooks.filter( ( item ) => {
         return item.id !== id;
-        
-      
       } );
-      
-        
+      count = newBook.length;
       setDidNotFinish( newBook );
-      
-
+      localStorage.setItem( 'didNotFinishBooks', JSON.stringify(newBook ) );
+      localStorage.setItem( 'NumberOfDnfBooks', count );
     }
-    
-      
   }
   
   const clearWantToRead = () => {
-    
-      
     setWantToRead( [] );
-
+    localStorage.setItem( 'wantToReadBooks', JSON.stringify( [] ) );
+    localStorage.setItem( 'NumberOfWantToReadBooks', 0 );
+    
   }
 
   const clearCurrentlyReading = () => {
-      
-
     setCurrentlyReading( [] );
-    
+    localStorage.setItem( 'currentlyReadingBooks', JSON.stringify( [] ) );
+    localStorage.setItem( 'NumberOfReadingBooks', 0 );
   } 
-  
     
   const clearRead = () => {
-      
-    
     setRead( [] );
-    
+    localStorage.setItem( 'readBooks', JSON.stringify( [] ) );
+    localStorage.setItem( 'NumberOfReadBooks', 0 );
   }
-  
-    
+
   const clearDidNotFinish = () => {
-      
-    
     setDidNotFinish( [] );
-    
+    localStorage.setItem( 'didNotFinishBooks', JSON.stringify( [] ) );
+    localStorage.setItem( 'NumberOfDnfBooks', 0 );
   }
-  
   return (
 
     <MyBooksContext.Provider value={ {
@@ -179,10 +187,13 @@ const MyBooksProvider = ({children}) => {
       clearCurrentlyReading,
       clearDidNotFinish,
       clearWantToRead,
-      clearRead, wantToRead,
+      clearRead,
+      wantToRead,
       currentlyReading,
       didNotFinish,
-      read
+      read,
+      
+     
     } }>
       { children }
     </MyBooksContext.Provider>

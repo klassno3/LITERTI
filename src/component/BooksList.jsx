@@ -36,7 +36,7 @@ const BooksList = ({book}) => {
             <h3 className="font-poppins text-center">By { author.slice( 0, 20 ) }</h3>
             <h3 className="font-poppins text-center flex gap-2"> { result } </h3>
             <h3 className="font-poppins text-center"> { publishedDate }</h3>
-            <h3 className="font-poppins text-center"> { pageCount } Pages</h3>
+            <h3 className="font-poppins text-center"> { pageCount ? pageCount + " Pages" : null }</h3>
           </div>
 
         </div>

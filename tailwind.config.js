@@ -22,6 +22,7 @@ module.exports = {
         'secondary-300': '#A68CC6', 
         'tertiary-100': '#040B19', 
         'tertiary-200': '#192231', 
+        'tertiary-300': '#3b4a64 ', 
     
       },
       fontFamily: {
