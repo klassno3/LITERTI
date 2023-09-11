@@ -3,7 +3,7 @@ import{Link} from "react-router-dom"
 const ImagesList = ({book}) => {
 
     
-   const { id, pageCount, title, author, thumbnail, averageRating } = book;
+   const { id,thumbnail } = book;
 
   return (
     <div>

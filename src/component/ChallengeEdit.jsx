@@ -5,18 +5,14 @@ const ChallengeEdit = ( { readingGoal, onGoalChange } ) => {
   const [ newGoal, setNewGoal ] = useState();
   const [ openTracker,setOpenTracker] = useState(false);
   const handleSubmit = (event) => {
-    
-       event.preventDefault(); 
+    event.preventDefault(); 
     onGoalChange( newGoal );
     setOpenTracker(true)
-    
   };
 
   const handleChange = (event) => {
     setNewGoal(event.target.value);
   };
-
-
   
   return (
     <div>
@@ -31,9 +27,7 @@ const ChallengeEdit = ( { readingGoal, onGoalChange } ) => {
           onChange={handleChange}
           type="number"
           min={1}
-          className="py-2 px-6 bg-tertiary-300/50 text-sm rounded-sm text-secondary-200 mx-auto flex justify-center font-poppins focus:outline-none focus:ring-2 focus:ring-primary-200"
-          
-          />
+          className="py-2 px-6 bg-tertiary-300/50 text-sm rounded-sm text-secondary-200 mx-auto flex justify-center font-poppins focus:outline-none focus:ring-2 focus:ring-primary-200"/>
           </div>
     <button
           onSubmit={ handleSubmit}
