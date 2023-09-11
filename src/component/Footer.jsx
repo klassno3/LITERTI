@@ -30,10 +30,10 @@ const Footer = () => {
               <div className="flex flex-col text-sm md:text-base font-poppins">
 
             <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/want to read"}>Want To Read</Link>
-            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/want to read"}>Currently Reading</Link>
-            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/want to read"}>Did Not Finish</Link>
-            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/want to read"}>Read</Link>
-            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/want to read"}>Reading Challenge</Link>
+            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/reading"}>Currently Reading</Link>
+            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/did not finish"}>Did Not Finish</Link>
+            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/read"}>Read</Link>
+            <Link className="hover:underline tracking-wide hover:text-secondary-200 text-secondary-100 transition-all duration-300" to={"/challenge"}>Reading Challenge</Link>
               </div>
             </div>
             </div>

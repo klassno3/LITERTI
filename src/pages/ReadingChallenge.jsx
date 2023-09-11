@@ -5,17 +5,22 @@ import Tracker from '../component/Tracker';
 import ImagesList from '../component/ImagesList';
 const ReadingChallenge = () => {
   
-  const [ showEdit, setShowEdit ] = useState( false );
-  const [ readingGoal, setReadingGoal ] = useState(); 
+  const [ showEdit, setShowEdit ] = useState(false  );
+  const [ readingGoal, setReadingGoal ] = useState(1); 
   const goal = localStorage.getItem( 'readingGoal' );
   const count = localStorage.getItem( 'NumberOfReadBooks' )
   const [submitted, setSubmitted] = useState(goal !== null);
- const booksFromRead= localStorage.getItem( 'readBooks' )
+  const booksFromRead= localStorage.getItem( 'readBooks' ) 
+  const today = new Date();
+  const year = today.getFullYear();
   
-    const handleSubmit = (event) => {
+  
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     localStorage.setItem( 'readingGoal', readingGoal );
-      setSubmitted(true)
+    setSubmitted( true );
+
       
     
   }
@@ -25,8 +30,9 @@ const ReadingChallenge = () => {
   }
 
   const handleEditClick = () => {
+    console.log(showEdit)
     setShowEdit( true )
-    
+    console.log(showEdit)
   }
 
   const handleGoalChange = (newGoal) => {
@@ -64,36 +70,35 @@ const ReadingChallenge = () => {
     const shortestBook = localStorage.getItem( 'shortestBook' );
     shortest = JSON.parse( shortestBook );
     }
-   
 
-  
- 
-
-  const today = new Date();
-  const year = today.getFullYear();
-
- 
 
   let content = 
         !submitted ? (
-      <div className="flex flex-col gap-6">
-        <form onSubmit={handleSubmit} className="flex flex-col  gap-2">
-
-        <label htmlFor="reading-goal" className="font-poppins text-lg ">Reading Goal : </label>
-        <input
-          onChange={handleChange}
-          type="number"
-          min={1}
-          className="py-2 px-6 bg-tertiary-300/50 text-sm rounded-sm text-secondary-200 mx-auto flex justify-center font-poppins focus:outline-none focus:ring-2 focus:ring-primary-200"
-          value={readingGoal}
-          />
-        <button
-          onClick={handleSubmit}
-          className="bg-primary-100 font-poppins tracking-wide flex justify-center transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-100 px-8 py-3 md:px-8 md:py-2 text-base md:text-xl"
+      <div className="flex flex-col items-center gap-6">
+              <form onSubmit={ handleSubmit}>
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-2">
+            
+        <label htmlFor="reading-goal" className="font-poppins text-base md:text-lg ">Reading Goal : </label>
+      <input
+                onChange={ handleChange }
+                id='reading-goal'
+                type="number"
+                value={readingGoal}
+                min={ 1 }
+                required
+            
+          className="py-2 px-6 w-1/2 md:w-full bg-tertiary-300/50 text-sm rounded-sm text-secondary-200 mx-auto flex justify-center font-poppins focus:outline-none focus:ring-2 focus:ring-primary-200"/>
+          </div>
+            <button
+              
+          onSubmit={ handleSubmit}
+          className="bg-primary-100 font-poppins w-1/2 md:w-full tracking-wide flex justify-center transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-100 px-8 py-3 md:px-8 md:py-2 text-base md:text-xl"
           >
           Submit
         </button>
-          </form>
+          </div>
+      </form> 
       </div>
     ) : (
       <div className="h-1/2">
@@ -102,7 +107,7 @@ const ReadingChallenge = () => {
       </div>
     )
   if ( showEdit ) {
-    content = <ChallengeEdit readingGoal={ goal } onGoalChange={ handleGoalChange } />
+    content = <ChallengeEdit edit={ setShowEdit} onGoalChange={ handleGoalChange } />
   }
   
   return (
@@ -115,7 +120,7 @@ const ReadingChallenge = () => {
             <MdOutlineModeEditOutline onClick={ handleEditClick } className='cursor-pointer absolute top-10 right-10 hover:text-primary-200 transition-all duration-300  text-2xl md:text-3xl ' />
             : null
           }
-            <p className='flex mt-10 justify-center items-center text-center font-dm text-base sm:text-3xl  lg:text-4xl xl:text-5xl tracking-wide focus:outline-none focus:ring-2 focus:ring-primary-300'>{ year } Reading Challenge </p>
+            <p className='flex mt-10 justify-center items-center text-center font-dm text-3xl  lg:text-4xl xl:text-5xl tracking-wide focus:outline-none focus:ring-2 focus:ring-primary-300'>{ year } Reading Challenge </p>
           { !goal ?
           <p className="font-poppins text-secondary-200/40 text-sm tracking-wide font-thin md:text-base text-center">You can set reading challenges and track the books you read</p>
             : <p className="font-poppins text-secondary-200/40 text-sm tracking-wide font-thin md:text-base text-center">You have read {count?count:0} book out of { goal }</p>
