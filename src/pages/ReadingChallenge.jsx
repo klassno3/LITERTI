@@ -3,18 +3,21 @@ import { MdOutlineModeEditOutline } from "react-icons/md"
 import ChallengeEdit from '../component/ChallengeEdit';
 import Tracker from '../component/Tracker';
 import ImagesList from '../component/ImagesList';
+import Button from '../component/Button';
+import {BsFillBarChartFill} from 'react-icons/bs'
+import Status from '../component/Status';
 const ReadingChallenge = () => {
   
   const [ showEdit, setShowEdit ] = useState(false  );
-  const [ readingGoal, setReadingGoal ] = useState(1); 
+  const [ readingGoal, setReadingGoal ] = useState( 1 ); 
+  const [showStatus,setShowStatus]=useState(false)
   const goal = localStorage.getItem( 'readingGoal' );
-  const count = localStorage.getItem( 'NumberOfReadBooks' )
   const [submitted, setSubmitted] = useState(goal !== null);
+  const count = localStorage.getItem( 'NumberOfReadBooks' )
   const booksFromRead= localStorage.getItem( 'readBooks' ) 
   const today = new Date();
   const year = today.getFullYear();
-  
-  
+  const percentage = Math.ceil( ( count * 100 ) / goal );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,6 +28,9 @@ const ReadingChallenge = () => {
     
   }
  
+  const handleStatus = () => {
+    setShowStatus(true)
+  }
   const handleChange = ( event ) => {
     setReadingGoal(event.target.value)
   }
@@ -38,12 +44,16 @@ const ReadingChallenge = () => {
   const handleGoalChange = (newGoal) => {
     setReadingGoal(newGoal)
   }
-  let renderedBook, longest, shortest;
+  let renderedBook, longest, shortest,totalPageCount, leastReadBook,highestReadBook,bookCategories ;
   if (booksFromRead ) {
       const books = booksFromRead
     const readBooks = JSON.parse( books )
+
+    // Calculate the sum of page counts
+ totalPageCount = readBooks.reduce((sum, book) => sum + book.pageCount, 0);
+
      renderedBook = readBooks.map( ( book ) => (
-      <ImagesList book={book}/>
+       <ImagesList key={ book.id } book={book}/>
       ) );
       
     // Find the book with the largest page count
@@ -69,7 +79,23 @@ const ReadingChallenge = () => {
     localStorage.setItem( "shortestBook", JSON.stringify( smallestPageCountBook ) );
     const shortestBook = localStorage.getItem( 'shortestBook' );
     shortest = JSON.parse( shortestBook );
+    
+   
+    if ( readBooks.length > 0 ) {
+      leastReadBook = readBooks.reduce( ( acc, curr ) => {
+        return curr.pageCount < acc.averageRating? curr : acc;
+      } );
     }
+   
+    if ( readBooks.length > 0 ) {
+      highestReadBook = readBooks.reduce( ( acc, curr ) => {
+        return curr.pageCount > acc.averageRating? curr : acc;
+      } );
+    }
+    // Get the category of each book
+  bookCategories = readBooks.map((book) => book.category);
+
+  }
 
 
   let content = 
@@ -103,7 +129,7 @@ const ReadingChallenge = () => {
     ) : (
       <div className="h-1/2">
           
-     <Tracker/>
+          <Tracker  />
       </div>
     )
   if ( showEdit ) {
@@ -116,7 +142,7 @@ const ReadingChallenge = () => {
         <div className="flex flex-col gap-6 md:gap-7 justify-start items-center bg-tertiary-200 w-11/12 relative md:w-7/12 mx-auto px-4 md:px-8  py-12 rounded-md ">
 
        <div className='flex flex-col justify-center items-center gap-3'>
-          {  goal ? 
+          {  goal && !showStatus ? 
             <MdOutlineModeEditOutline onClick={ handleEditClick } className='cursor-pointer absolute top-10 right-10 hover:text-primary-200 transition-all duration-300  text-2xl md:text-3xl ' />
             : null
           }
@@ -133,10 +159,27 @@ const ReadingChallenge = () => {
             
         
       </div>
-              </div>
-        <p className="mx-auto flex justify-center text-center text-xl md:text-2xl lg:text-3xl font-poppins my-10 md:my-20">List of books you have read</p>
+        </div>
+       
+        {!showStatus ? 
+          <div>
+            <div className="flex items-center justify-between">
+              <p className=" flex justify-center  text-base md:text-2xl lg:text-3xl font-poppins my-10 md:my-20">List of books you have read</p>
+              <div className="">
+                { percentage === 100 && <Button onClick={ handleStatus }>
+                  <div className="flex text-secondary-100 gap-1 items-center">
+                    <BsFillBarChartFill/>
+                  <p>Status</p>
+                  </div>
+                </Button> }
+              </div>        
+            </div>
+
+            
+        
         <div className="flex justify-between items-start">
 
+          
       <div className="w-4/5 gap-y-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between items-start">
 
           { renderedBook }
@@ -161,6 +204,8 @@ const ReadingChallenge = () => {
             }
         </div>
         </div>
+          </div>
+          : <Status category={ bookCategories }  leastRead={leastReadBook } highestRead={highestReadBook} longest={ longest } shortest={ shortest } books={ booksFromRead } totalPage={ totalPageCount } />}
       </div>
    </div>
   )

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import BookList from "../component/BooksList";
 import Search from "../component/Search";
 import Loader from "../component/Loader";
-import HeroPic from "../images/hero-min.jpg"
+import HeroPic from "../images/hero-min (1).jpg"
 import { FetchBooksContext } from "../context/FetchBooksContext";
 
 const Home = () => {
@@ -23,9 +23,9 @@ const Home = () => {
     return { id, description, publishedDate, title, author, thumbnail, pageCount, averageRating };
     
   } );
-
   const renderedBooks = result.map( ( book ) => (
     <BookList key={ book.id } book={ book } />
+
 
   ) );
 

@@ -5,9 +5,10 @@ const Range = ( { id ,pageCount} ) => {
   
   
    const handleRange = (event) => {
-    setPage( event.target.value )
-    // const updatedBook = { ...book, Progress: `${parseFloat( page ) } / ${pageCount} ages` };
+     setPage( event.target.value )
+     localStorage.setItem("page",page)
   }
+
 
   useEffect( () => {
     

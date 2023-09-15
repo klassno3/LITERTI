@@ -31,7 +31,7 @@ const BooksDetails = () => {
   for ( let i = 0; i < averageRating; i++ ) {
     result.push( <div className='text-primary-200'><FaStar size={ 25 } /></div> );
   }
-  console.log(pageCount)
+
   
   const handleClick = () => {
     setShowText( !showText );

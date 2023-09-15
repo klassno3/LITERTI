@@ -27,7 +27,8 @@ const Tracker = () => {
       </div>
         <p className="text-base md:text-lg lg:text-2xl">
        {percentage}%
-        </p>
+      </p>
+
       
     </div>
   )

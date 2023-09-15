@@ -3,6 +3,7 @@ import { BsTrash3Fill } from 'react-icons/bs';
 import { AiFillStar } from 'react-icons/ai';
 import { MyBooksContext } from '../context/MyBooksContext';
 import Range from './Range';
+
 const MyBook = ( { book ,name,rating,tracking} ) => {
   const { id, pageCount, title, author, thumbnail, averageRating } = book;
   const { removeBook } = useContext( MyBooksContext )
@@ -23,9 +24,10 @@ const MyBook = ( { book ,name,rating,tracking} ) => {
   };
 
   const handleChange = (event) => {
-    setRate(event.target.value)
+    setRate( event.target.value )
+    localStorage.setItem('rate', rate)
   }
-
+ 
   
 
   return (
@@ -35,14 +37,15 @@ const MyBook = ( { book ,name,rating,tracking} ) => {
           <div>
           <img className="w-full rounded-sm " src={ thumbnail } alt="" />
           </div>
-            <button onClick={ () => removeBook( id, name ) } className=" bg-primary-100 justify-center flex items-center transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-200 py-3" ><BsTrash3Fill /></button>
+                <button onClick={()=>   removeBook( id, name ) } className="bg-primary-100 flex justify-center transition-all rounded-sm duration-300 hover:bg-primary-200 text-secondary-100 px-2 py-1.5 md:px-4 md:py-2.5 text-sm md:text-base"><BsTrash3Fill/></button>
+
         </div>
         <div className="w-full text-secondary-100">
           <div className="flex flex-col items-start justify-end gap-2">
             <h1 className="text-xl  ">{ title }</h1>
             <p className="text-base font-thin">{ author }</p>
             <div className="flex gap-8 items-center">
-              <p className="flex gap-1 ">{ result }</p>
+              <d className="flex gap-1 ">{ result }</d>
               <p className="text-secondary-100/90">{ averageRating }</p>
             </div>
             <p className="text-secondary-100/90">{ pageCount ? pageCount + " Pages" : null }</p>

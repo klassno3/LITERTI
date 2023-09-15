@@ -8,16 +8,13 @@ const MyBooksProvider = ({children}) => {
   
   const addToWantToRead = ( book, id ) => {
   const isBookInList = wantToRead.some((item) => item.id === id);
-      const isBookInOtherList = currentlyReading.some( ( item ) => item.id === id ) || read.some( ( item ) => item.id === id ) || didNotFinish.some( ( item ) => item.id === id );
+    const isInOtherList = [ currentlyReading, read, didNotFinish ].some( list => list.some( item => item.id === id ) )
+    
 
-    currentlyReading.some((item) => item.id === id) ||
-    read.some((item) => item.id === id) ||
-    didNotFinish.some((item) => item.id === id);
-
-  if (isBookInOtherList) {
+  if (isInOtherList) {
     alert('This book is already in another list!');
   }
-  if (!isBookInList && !isBookInOtherList) {
+  if (!isBookInList && !isInOtherList) {
     const updatedRead = [...wantToRead, { ...book, id }];
     setWantToRead(updatedRead);
     const bookCount = updatedRead.length ;
@@ -36,13 +33,15 @@ const MyBooksProvider = ({children}) => {
 
     // Check if the book already exists in the wantToRead array
     const isBookInList = currentlyReading.some( ( item ) => item.id === id );
-    const isBookInOtherList = wantToRead.some( ( item ) => item.id === id ) || read.some( ( item ) => item.id === id ) || didNotFinish.some( ( item ) => item.id === id );
+
+    const isInOtherList = [ wantToRead, read, didNotFinish ].some( list => list.some( item => item.id === id ) )
     
-   if ( isBookInOtherList ) {
+    
+   if ( isBookInList ) {
       alert( 'This Book is  already in the other list!!! ' );
       
     }
-    if (!isBookInList && !isBookInOtherList) {
+    if (!isBookInList && !isInOtherList) {
        const updatedRead = [...currentlyReading, { ...book, id }];
       setCurrentlyReading(updatedRead );
       
@@ -59,13 +58,16 @@ const MyBooksProvider = ({children}) => {
  
     // Check if the book already exists in the wantToRead array
     const isBookInList = read.some( ( item ) => item.id === id );
-    const isBookInOtherList = wantToRead.some( ( item ) => item.id === id ) || currentlyReading.some( ( item ) => item.id === id ) || didNotFinish.some( ( item ) => item.id === id );
+     const isInOtherList = [wantToRead, currentlyReading, didNotFinish].some(
+    (list) => list.some((item) => item.id === id)
+    );
     
-    if ( isBookInOtherList ) {
-      alert( 'This Book is  already in the other list!!! ' );
-      
+
+    if ( isInOtherList ) {
+      alert( 'This book is already in another list!' );
     }
-    if ( !isBookInList && !isBookInOtherList ) {
+  
+    if ( !isBookInList && !isInOtherList ) {
       const updatedRead = [...read, { ...book, id }];
     setRead(updatedRead);
     const bookCount = updatedRead.length ;
@@ -80,14 +82,14 @@ const MyBooksProvider = ({children}) => {
  
       // Check if the book already exists in the wantToRead array
     const isBookInList = didNotFinish.some( ( item ) => item.id === id );
-    const isBookInOtherList = wantToRead.some( ( item ) => item.id === id ) || currentlyReading.some( ( item ) => item.id === id ) || read.some( ( item ) => item.id === id );
-    
-   if ( isBookInOtherList ) {
+    const isInOtherList = [ wantToRead, currentlyReading, read ].some(  list  => 
+      list.some( ( item ) => item.id === id ))
+   if ( isBookInList) {
       alert( 'This Book is  already in the other list!!! ' );
       
     }
     
-    if (!isBookInList && !isBookInOtherList) {
+    if (!isBookInList && !isInOtherList) {
      const updatedRead = [...didNotFinish, { ...book, id }];
     setDidNotFinish(updatedRead);
     const bookCount = updatedRead.length ;
@@ -167,6 +169,7 @@ const MyBooksProvider = ({children}) => {
     
   const clearRead = () => {
     setRead( [] );
+    console.log("lover")
     localStorage.setItem( 'readBooks', JSON.stringify( [] ) );
     localStorage.setItem( 'NumberOfReadBooks', 0 );
   }

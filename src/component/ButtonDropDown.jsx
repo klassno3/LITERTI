@@ -28,7 +28,7 @@ const ButtonDropDown = ( { options, selection, onSelect,book,id } ) => {
 
   const handleOptionClick = (option, book, id) => {
   setIsOpen(false);
-  console.log(option.value);
+
   
   if (option.value === "Want to Read ") {
     addToWantToRead(book, id);
